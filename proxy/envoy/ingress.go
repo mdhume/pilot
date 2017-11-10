@@ -19,6 +19,7 @@ import (
 	"fmt"
 	"path"
 	"sort"
+	"strings"
 
 	"github.com/golang/glog"
 
@@ -44,7 +45,7 @@ func buildIngressListeners(mesh *proxyconfig.MeshConfig,
 		listener.SSLContext = &SSLContext{
 			CertChainFile:  path.Join(proxy.IngressCertsPath, proxy.IngressCertFilename),
 			PrivateKeyFile: path.Join(proxy.IngressCertsPath, proxy.IngressKeyFilename),
-			AlpnProtocols:  ListenersAlpnProtocols,
+			ALPNProtocols:  strings.Join(ListenersALPNProtocols, ","),
 		}
 		listeners = append(listeners, listener)
 	}
